@@ -15,6 +15,8 @@ const Button = styled.button`
   letter-spacing: 1px;
 `
 
-const SearchButton = props => <Button>SEARCH</Button>
+const SearchButton = props => (
+  <Button onClick={props.clickHandler}>SEARCH</Button>
+)
 
 export default SearchButton

@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useRef } from "react"
 import styled from "styled-components"
 import SearchButton from "./SearchButton"
 
-const SearchBarWrapper = styled.div`
+const SearchBarWrapper = styled.form`
   display: flex;
   align-items: center;
   margin: 0 auto 12px auto;
@@ -21,11 +21,31 @@ const Input = styled.input`
   border-bottom-left-radius: 0.25rem
 `
 
-const SearchBar = () => (
-  <SearchBarWrapper>
-    <Input></Input>
-    <SearchButton />
-  </SearchBarWrapper>
-)
+const SearchBar = props => {
+  const ref = useRef()
+
+  const clickHandler = async () => {
+    const raw = await fetch(
+      "https://api.unsplash.com/search/photos?" +
+        "client_id=65f622264cdd351d875fb557cdefbee529978cbe2e748d6df31ef0d1636d1971&" +
+        "query=" +
+        encodeURIComponent(ref.current.value)
+    )
+    const response = await raw.json()
+    console.log(response)
+    await props.getImages(response)
+  }
+
+  return (
+    <SearchBarWrapper
+      onSubmit={e => {
+        e.preventDefault()
+      }}
+    >
+      <Input ref={ref}></Input>
+      <SearchButton clickHandler={clickHandler} />
+    </SearchBarWrapper>
+  )
+}
 
 export default SearchBar

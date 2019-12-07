@@ -1,12 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import Layout from "../components/Layout"
-
 import SearchBar from "../components/SearchBar"
+import Image from "../components/Image"
 
 const Container = styled.div`
   margin: 6rem auto;
-  max-width: 650px;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,12 +29,36 @@ const UnderText = styled.h2`
   margin-top: 0;
   margin-bottom: 20px;
 `
-export default () => (
-  <Layout>
-    <Container>
-      <Heading>IMAGE SEARCH</Heading>
-      <UnderText>TYPE SOMETHING IN</UnderText>
-      <SearchBar />
-    </Container>
-  </Layout>
-)
+const ImageContainer = styled.div`
+  width 100%;
+`
+
+const App = () => {
+  const [images, setImages] = useState({ fetched: false, image: {} })
+
+  const getImages = async image => {
+    await setImages({ fetched: true, image: image.results })
+  }
+
+  return (
+    <Layout>
+      <Container>
+        <Heading>IMAGE SEARCH</Heading>
+        <UnderText>TYPE SOMETHING IN</UnderText>
+        <SearchBar getImages={getImages} />
+        <ImageContainer>
+          {images.fetched
+            ? images.image.map(image => <Image image={image} key={image.id} />)
+            : null}
+          {images.fetched && images.image.length === 0 ? (
+            <p>No images found</p>
+          ) : (
+            ""
+          )}
+        </ImageContainer>
+      </Container>
+    </Layout>
+  )
+}
+
+export default App
