@@ -1,6 +1,7 @@
 import React, { useRef } from "react"
 import styled from "styled-components"
 import SearchButton from "./SearchButton"
+import { useSearch } from "../context/context"
 
 const SearchBarWrapper = styled.form`
   display: flex;
@@ -23,8 +24,11 @@ const Input = styled.input`
 
 const SearchBar = props => {
   const ref = useRef()
+  const state = useSearch()
 
   const clickHandler = async () => {
+    console.log(ref.current.value)
+    state.setSearchTerm(ref.current.value)
     const raw = await fetch(
       "https://api.unsplash.com/search/photos?" +
         "client_id=65f622264cdd351d875fb557cdefbee529978cbe2e748d6df31ef0d1636d1971&" +
@@ -33,6 +37,7 @@ const SearchBar = props => {
     )
     const response = await raw.json()
     console.log(response)
+    await state.setPageNumber(response.total_pages)
     await props.getImages(response)
   }
 

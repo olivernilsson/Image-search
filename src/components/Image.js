@@ -8,6 +8,7 @@ const Image = props => {
     height: 250px;
     margin 30px;
     display: inline-block;
+    background-size: cover;
     transition: 200ms ease-in-out;
     &:hover {
       transform: scale(1.05);

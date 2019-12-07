@@ -3,6 +3,9 @@ import styled from "styled-components"
 import Layout from "../components/Layout"
 import SearchBar from "../components/SearchBar"
 import Image from "../components/Image"
+import Pagination from "../components/Pagination"
+import { SearchContext } from "../context/context"
+import { useContextValues } from "../context/context"
 
 const Container = styled.div`
   margin: 6rem auto;
@@ -30,7 +33,7 @@ const UnderText = styled.h2`
   margin-top: 0;
   margin-bottom: 20px;
 `
-const ImageContainer = styled.div`
+const ImageWrapper = styled.div`
   width 100%;
 `
 
@@ -42,23 +45,28 @@ const App = () => {
   }
 
   return (
-    <Layout>
-      <Container>
-        <Heading>IMAGE SEARCH</Heading>
-        <UnderText>TYPE SOMETHING IN</UnderText>
-        <SearchBar getImages={getImages} />
-        <ImageContainer>
-          {images.fetched
-            ? images.image.map(image => <Image image={image} key={image.id} />)
-            : null}
-          {images.fetched && images.image.length === 0 ? (
-            <UnderText>No images found</UnderText>
-          ) : (
-            ""
-          )}
-        </ImageContainer>
-      </Container>
-    </Layout>
+    <SearchContext.Provider value={useContextValues()}>
+      <Layout>
+        <Container>
+          <Heading>IMAGE SEARCH</Heading>
+          <UnderText>TYPE SOMETHING IN</UnderText>
+          <SearchBar getImages={getImages} />
+          <ImageWrapper>
+            {images.fetched
+              ? images.image.map(image => (
+                  <Image image={image} key={image.id} />
+                ))
+              : null}
+            {images.fetched && images.image.length === 0 ? (
+              <UnderText>No images found</UnderText>
+            ) : (
+              ""
+            )}
+            <Pagination getImages={getImages} />
+          </ImageWrapper>
+        </Container>
+      </Layout>
+    </SearchContext.Provider>
   )
 }
 

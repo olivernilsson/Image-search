@@ -13,6 +13,7 @@ const Button = styled.button`
   font-weight: bold;
   font-family: "Catamaran", sans-serif;
   letter-spacing: 1px;
+  cursor: pointer;
 `
 
 const SearchButton = props => (
