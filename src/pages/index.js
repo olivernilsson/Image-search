@@ -51,7 +51,7 @@ const App = () => {
             ? images.image.map(image => <Image image={image} key={image.id} />)
             : null}
           {images.fetched && images.image.length === 0 ? (
-            <p>No images found</p>
+            <UnderText>No images found</UnderText>
           ) : (
             ""
           )}
