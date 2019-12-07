@@ -62,7 +62,12 @@ const App = () => {
             ) : (
               ""
             )}
-            <Pagination getImages={getImages} />
+            {images.image.length === undefined || images.image.length === 0 ? (
+              ""
+            ) : (
+              <Pagination getImages={getImages} />
+            )}
+            {console.log(images.image.length)}
           </ImageWrapper>
         </Container>
       </Layout>
