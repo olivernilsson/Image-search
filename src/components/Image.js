@@ -7,7 +7,7 @@ const Image = props => {
     width: 250px;
     height: 250px;
     margin 30px;
-    display: inline-block
+    display: inline-block;
   `
   return <Image></Image>
 }
