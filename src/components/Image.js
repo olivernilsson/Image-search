@@ -10,6 +10,7 @@ const Image = props => {
     display: inline-block;
     background-size: cover;
     transition: 200ms ease-in-out;
+    cursor: pointer;
     &:hover {
       transform: scale(1.05);
       }

@@ -12,36 +12,34 @@ const PaginationWrapper = styled.div`
 
 const Pagination = props => {
   const state = useSearch()
-  console.log(state)
-  const [pageNumber, setPageNumber] = useState(1)
 
   const clickHandler = async page => {
-    if (page === "minus" && pageNumber > 1) {
-      await setPageNumber(pageNumber - 1)
-    } else if (page === "plus" && pageNumber < state.pageNumber) {
-      await setPageNumber(pageNumber + 1)
+    if (page === "minus" && state.pageNumber > 1) {
+      await state.setPageNumber(state.pageNumber - 1)
+    } else if (page === "plus" && state.pageNumber < state.totalPageNumber) {
+      await state.setPageNumber(state.pageNumber + 1)
     }
-    await console.log(pageNumber)
   }
 
   useEffect(() => {
     const run = async () => {
       const raw = await fetch(
-        `https://api.unsplash.com/search/photos?page=${pageNumber};` +
+        `https://api.unsplash.com/search/photos?page=${state.pageNumber};` +
           "client_id=65f622264cdd351d875fb557cdefbee529978cbe2e748d6df31ef0d1636d1971&" +
           "query=" +
           encodeURIComponent(state.searchTerm)
       )
       const response = await raw.json()
-      state.setPageNumber(response.total_pages)
+      state.setTotalPageNumber(response.total_pages)
       await props.getImages(response)
     }
     run()
-  }, [pageNumber])
+  }, [state.pageNumber])
 
   return (
     <PaginationWrapper>
-      <ChevronLeft onClick={() => clickHandler("minus")} /> {pageNumber}
+      <ChevronLeft onClick={() => clickHandler("minus")} />{" "}
+      {state.pageNumber + "/" + state.totalPageNumber}
       <ChevronRight onClick={() => clickHandler("plus")} />
     </PaginationWrapper>
   )

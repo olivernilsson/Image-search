@@ -67,7 +67,6 @@ const App = () => {
             ) : (
               <Pagination getImages={getImages} />
             )}
-            {console.log(images.image.length)}
           </ImageWrapper>
         </Container>
       </Layout>

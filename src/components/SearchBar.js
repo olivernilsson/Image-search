@@ -37,7 +37,8 @@ const SearchBar = props => {
     )
     const response = await raw.json()
     console.log(response)
-    await state.setPageNumber(response.total_pages)
+    await state.setPageNumber(1)
+    await state.setTotalPageNumber(response.total_pages)
     await props.getImages(response)
   }
 
