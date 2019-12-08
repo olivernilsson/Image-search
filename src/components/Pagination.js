@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import { ChevronLeft, ChevronRight } from "react-feather"
 import { useSearch } from "../context/context"

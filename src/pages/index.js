@@ -6,6 +6,7 @@ import Image from "../components/Image"
 import Pagination from "../components/Pagination"
 import { SearchContext } from "../context/context"
 import { useContextValues } from "../context/context"
+import { Link } from "gatsby"
 
 const Container = styled.div`
   margin: 6rem auto;
@@ -54,7 +55,14 @@ const App = () => {
           <ImageWrapper>
             {images.fetched
               ? images.image.map(image => (
-                  <Image image={image} key={image.id} />
+                  <Link
+                    to="/imageDetail"
+                    image={image}
+                    key={image.id}
+                    state={{ image: image }}
+                  >
+                    <Image image={image} />
+                  </Link>
                 ))
               : null}
             {images.fetched && images.image.length === 0 ? (
