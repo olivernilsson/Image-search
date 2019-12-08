@@ -31,12 +31,15 @@ const UnderText = styled.h2`
 `
 
 const imageDetail = ({ location }) => {
+  let desc =
+    location.state.image.alt_description.charAt(0).toUpperCase() +
+    location.state.image.alt_description.slice(1)
   return (
     <Layout>
       <Container>
         <Heading>{location.state.image.description}</Heading>
         <ImageFull image={location.state.image} />
-        <UnderText>{location.state.image.alt_description}</UnderText>
+        <UnderText>{desc}</UnderText>
       </Container>
     </Layout>
   )
