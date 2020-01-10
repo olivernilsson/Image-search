@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "react-feather"
 import { useSearch } from "../context/context"
 
 const PaginationWrapper = styled.div`
-  height 30px;
+  height: 30px;
   line-height: 30px;
   vertical-align: baseline;
   font-size: 2rem;

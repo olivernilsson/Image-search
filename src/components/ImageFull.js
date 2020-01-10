@@ -11,7 +11,7 @@ const ImageFull = props => {
     background-size: cover;
 
   `
-  return <Image>{console.log(props.image)}</Image>
+  return <Image></Image>
 }
 
 export default ImageFull

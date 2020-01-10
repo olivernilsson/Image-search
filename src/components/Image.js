@@ -6,7 +6,7 @@ const Image = props => {
     background-image: url(${props.image.urls.small});
     width: 250px;
     height: 250px;
-    margin 30px;
+    margin: 30px;
     display: inline-block;
     background-size: cover;
     transition: 200ms ease-in-out;

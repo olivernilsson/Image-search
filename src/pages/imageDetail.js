@@ -15,7 +15,7 @@ const Container = styled.div`
   text-align: center;
 `
 const Heading = styled.h1`
-  font-size: 5rem;
+  font-size: 4rem;
   font-family: "Catamaran", sans-serif;
   font-weight: bold;
   color: #edf5e1;
